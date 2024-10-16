@@ -1,0 +1,4 @@
+themes:
+  - name: 'msas' 
+    port: 80
+    host: 'reminder.eyone.net'

@@ -1,0 +1,21 @@
+@function project-theme(
+    $primary,
+    $sidebar,
+    $sidebarItemIconColor,
+    $sidebarSubItemColor,
+    $sidebarSubItemColorDark,
+    $sidebarItemActiveColor,
+    $sidebarActiveBg,
+    $warning
+) {
+    @return (
+        primary: $primary,
+        sidebar: $sidebar,
+        sidebarItemIconColor: $sidebarItemIconColor,
+        sidebarSubItemColor: $sidebarSubItemColor,
+        sidebarSubItemColorDark: $sidebarSubItemColorDark,
+        sidebarItemActiveColor: $sidebarItemActiveColor,
+        sidebarActiveBg: $sidebarActiveBg,
+        warning: $warning
+    );
+}

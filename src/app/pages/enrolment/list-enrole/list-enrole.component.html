@@ -1,0 +1,182 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h4 class="mb-0">Liste des enrrôlés</h4>
+        <div class="page-title-right">
+          <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a routerLink="/">Accueil</a></li>
+            <li class="breadcrumb-item active">Liste des enrrôlés</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row justify-content-md-between">
+            <div class="col-md-6 d-flex align-items-center">
+              <button class="btn btn-warning mr-2" (click)="open(search)">
+                <i class="ri-search-line align-bottom mr-1"></i>
+                {{ 'MENUITEM.TABLES.LABELS.SEARCH' | translate}}
+              </button>
+            </div>
+            <div class="col-md-6">
+            
+            </div>
+          </div>
+   
+          <div class="table-responsive mt-3">
+            <table id="basic-datatable" class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>{{ 'PATIENT.LIST.REF' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.SEX' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.FIRSTNAME' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.LASTNAME' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.BIRTHDAY' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.AGE' | translate}}</th>
+                  <th>{{ 'PATIENT.LIST.PHONE' | translate}}</th>
+                  <th class="text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let table of paginateData ;let i=index">
+                <tr>
+                  <td>{{table.eyoneInternalId}}</td>
+                  <td>{{table.sex?.message}}</td>
+                  <td>{{table.firstName}}</td>
+                  <td>{{table.lastName}}</td>
+                  <td>{{table.birthday}}</td>
+                  <td>{{table.age}}</td>
+                  <td>{{table.mobileNumber}}</td>
+                  <td class="text-left">
+                    <div ngbDropdown container="body">
+                      <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
+                        aria-expanded="true" style="cursor: pointer;"></i>
+                      <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                        <a  [routerLink]="['/enrolement/enrole', table.eyoneInternalId]" class="dropdown-item"
+                         ><i
+                            
+                            class="ri-eye-line align-bottom mr-3"></i>{{'GLOBAL.VISUALISER' | translate}}</a>
+                        
+                       <a [routerLink]="['/enrolement/enrole', table.eyoneInternalId]" class="dropdown-item"
+                         ><i
+                            class="ri-edit-line align-bottom mr-3"></i>{{'GLOBAL.MODIFIER' | translate}}</a>
+                        <a 
+                          class="dropdown-item" ><i
+                            class="ri-qr-code-line align-bottom mr-3"></i>{{'ENROLMENT.ATTACHE_CARD' | translate}}</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-md-between align-items-md-center mt-2">
+            <div class="col-sm-12 col-md-5">
+              <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">{{
+                'MENUITEM.TABLES.LABELS.SHOWING' | translate}}
+                {{startIndex}} {{ 'MENUITEM.TABLES.LABELS.TO' | translate}}
+                {{endIndex}} {{ 'MENUITEM.TABLES.LABELS.OF' | translate}} {{collectionSize}}
+                {{ 'MENUITEM.TABLES.LABELS.ENTRIES' | translate}}
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-7">
+              <div class="row justify-content-end">
+                <div class="dataTables_length mr-3" id="tickets-table_length">
+                  <label class="d-inline-flex align-items-center">{{ 'MENUITEM.TABLES.LABELS.SHOW' | translate}}
+                    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                      [(ngModel)]="pageSize" (change)="getPaginatedData();"
+                      class="custom-select custom-select-sm form-control form-control-sm mx-2">
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25">25</option>
+                      <option [ngValue]="50">50</option>
+                      <option [ngValue]="100">100</option>
+                    </select> {{ 'MENUITEM.TABLES.LABELS.ENTRIES' | translate}}
+                  </label>
+                </div>
+                <div class="text-md-right float-md-right pagination-rounded">
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page$" [pageSize]="pageSize"
+                    (pageChange)="getPaginatedData();" [maxSize]="2" [boundaryLinks]="true" [rotate]="true">
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+  <ng-template #search let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ 'NOTIFICATIONS.LIST.SEARCH_TITLE' | translate }}</h4>
+        <span type="button"  aria-label="Close" (click)="modal.dismiss('Cross click')">
+          X
+        </span>
+    </div>
+    <div class="modal-body">
+        <form formGroup="searchForm" class="col-md-12">
+           <div class="row col-12">
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="firstName">Référence</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="lastName">Date de Naissance</label>
+                        <input type="date" class="form-control" formControlName="lasttName">
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="firstName">Prénom</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="lastName">Nom</label>
+                        <input type="text" class="form-control" formControlName="lasttName">
+                    </div>
+                </div>
+            </div>
+             <div class="row col-12">
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="firstName">Téléphone</label>
+                        <input type="text" class="form-control" formControlName="phone">
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex flex-column align-items-start">
+                    <div class="form-group w-100">
+                        <label for="code">Code</label>
+                        <input type="text" class="form-control" formControlName="code">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary w-md waves-effect waves-light float-md-right" (click)="getPaginatedData()">{{ 'GLOBAL.SEARCH' | translate }}</button>
+    </div>
+</ng-template>
+
+
+
+<ngx-spinner type="ball-scale-multiple">
+  <p style="color: white; font-size: larger;">
+    Veuillez patienter s'il vous plait, ça ne prendra qu'un petit moment 😊 ...
+  </p>
+</ngx-spinner>

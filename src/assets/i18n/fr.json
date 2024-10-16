@@ -1,0 +1,373 @@
+{
+  "SHARED": {
+    "HOME": "Accueil",
+    "NOTIFICATIONS": "Notifications",
+    "REMINDERS": "Rappels",
+    "EDIT": "Modifier"
+  },
+  "AUTH": {
+    "TEXT": {},
+    "BUTTONS": {
+      "LOGIN": "Connexion"
+    }
+  },
+  "HEADER": {
+    "NOTIFICATIONS": {
+      "SUPPORT": "Support",
+      "SLOGAN": "Votre activité à vos côtés.",
+      "COPY_WRITE": "© 2022 EYONE.",
+      "NOTIFICATION": "Notifications"
+    },
+    "LOGIN": {
+      "ACCOUNT": "Mon Compte",
+      "ORGANIZATION": "Mon organisation",
+      "INTERNAL_PHONE_BOOK": "Annuaire interne",
+      "ORGANIZATION_CHART": "Organigramme",
+      "PHONE_BOOK": "Annuaire contacts",
+      "LOGOUT": "Se déconnecter",
+      "LOGIN": "Connexion",
+      "REQUIRED_ID": "Identifiant requis",
+      "REQUIRED": "Ce champs est requis",
+      "ID": "Identifiant",
+      "VALIDE_EMAIL": "Veuillez saisir une adresse mail valide",
+      "PASSWORD": "Mot de passe",
+      "PASSWORD_CONFIRM": "Confirmation du mot de passe",
+      "PASSWORD_CHARACTERS": "Le mot de passe doit contenir au moins 6 charactères.",
+      "PASSWORD_CONFIRM_VALUES": "Les mots de passe doivent être identiques.",
+      "REQUIRED_PASSWORD": "Mot de passe requis",
+      "BTN_LOGIN": "Se connecter",
+      "PASSWORD_FORGOTEN": "Mot de passe oublié ? Réinitialiser"
+    }
+  },
+  "MENU": {
+    "TITLE": "Passeport Médical",
+    "SUB_MENU": {
+      "ELEMENT_1": "Enrôlement",
+      "ELEMENT_2": "Recherche"
+     
+    }
+  },
+
+
+   "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "LIST": {
+      "TITLE": "Liste des notifications",
+      "SEARCH_TITLE": "Filtrer par organisation",
+      "SELECT_ORG": "Sélectionnez l'Organisme",
+       "PUSH_TITLE": "Push Notification",
+       "BY_FORM": "Par formulaire",
+       "BY_FILE": "Par Téléversement de Fichier",
+       "SELECT_CIBLE":"Sélectionnez la cible",
+       "SELECT_CHANNEL":"Sélectionnez le canal",
+       "SELECT_TYPE":"Sélectionnez le type de destinataire",
+       "ENTER_NUMBERS":"Entrer les numéros séparés par des virgules",
+       "REASON":"Motif du message",
+       "MESSAGE":"Message"
+    }
+  },
+  "RAPPELS"  : { 
+    "TITLE": "Rappels",
+    "PENDING_REMINDER": {
+      "TITLE": "Liste des rappels en attente"
+    },
+    "TREATED_REMINDER": {
+    "TITLE": "Liste des rappels traités"
+  }
+  },
+  "PARAMETRAGE": {
+    "TITLE": "Paramétrage rappel",
+    "CREATE": "Créer",
+    "EVENEMENT": "Événement",
+    "TYPE_DESTINATAIRE": "Type destinataire",
+    "TYPE_RAPPEL": "Type de rappel",
+    "VALEUR": "Valeur"
+  },
+  "GLOBAL":{
+    "FIRST_NAME": "Prénom",
+    "LAST_NAME": "Nom",
+    "EMAIL": "Email",
+    "TELEPHONE": "Téléphone",
+    "ADDRESS": "Adresse",
+    "STATUT": "Statut",
+    "SUPPORT": "Support",
+    "PATIENT": "Patient",
+    "DATE": "Date",
+    "SEND": "Envoyer",
+    "SEND_ALL": "Envoyer à tous",
+    "SEND_ALL_TEXT": "Envoyer à tous les utilisateurs",
+    "MESSAGE": "Message",
+    "MOTIF": "Motif",
+    "MOTIF_MESSAGE": "Motif du message",
+    "SEARCH": "Rechercher",
+    "ENVOYER": "Envoyer",
+    "CREATE": "Créer",
+    "AFFICHER": "Afficher",
+    "ANULLER": "Annuler",
+    "SUPPRIMER": "Supprimer",
+    "MODIFIER": "Modifier",
+    "VALIDER": "Valider",
+    "ACTION": "Action",
+    "A": "à",
+    "SUR": "sur",
+    "TOUT": "Tout",
+    "ELEMENTS": "éléments",
+    "ACCUEIL": "Accueil",
+    "VISUALISER": "Visualiser",
+    "LOADING_MESSAGE": "Veuillez patienter s'il vous plait, ça ne prendra qu'un petit moment 😊 ..."
+  },
+
+    "PATIENT": {
+    "TEXT": "Patients",
+    "REFUS": "Attestation de refus",
+    "ADMITTED": "Autorisation d'admission ",
+    "PATIENT": "Patient",
+    "PATIENT_ID_MAIN_INFO": "Identité du patient - Informations Principales",
+    "PATIENT_ID_ADD_INFO": "Identité du patient - Informations Complémentaires",
+    "ENTER_ADD_INFO": "Renseigner les informations complémentaires",
+    "ADD_PATIENT_CAT": "Ajouter une catégorie de patient",
+    "MENU_GRO": "Dossier de grossesse",
+    "LIST": {
+      "CREATE": "Créer",
+      "CREATE-NEW": "Nouveau patient",
+      "CREATE_PATIENT": "Créer un patient",
+      "PATIENT_CREATION": "Création d'un patient",
+      "LIST": "Les patients",
+      "AGE": "Age",
+      "REF": "Référence",
+      "SEX": "Sexe",
+      "FIRSTNAME": "Prénom",
+      "LASTNAME": "Nom",
+      "BIRTHDAY": "Date de naissance",
+      "PHONE": "Téléphone",
+      "INTERNAL_REF": "Référence interne",
+      "EYONE_REF": "Référence Eyone",
+      "PATIENT_CAT": "Catégorie de patient",
+      "MARITAL_STATUS": "Statut matrimonial",
+      "PLACE_OF_BIRTH": "Lieu de naissance",
+      "MOTHER_FIRST_LAST_NAME": "Prénom et nom de la mère",
+      "MAIDEN_NAME": "Nom de jeune fille",
+      "AREA_CODE": "Indicatif",
+      "MOBILE_NUMBER": "Numero mobile",
+      "OTHER_NUMBER": "Autre numero",
+      "EMAIL": "Email",
+      "TYPE_OF_ID_DOC": "Type de pièce d'identité",
+      "ID_NUMBER": "Numéro pièce d'identité",
+      "FATHER_FIRST_LAST_NAME": "Prénom et nom du père",
+      "PROFESSION": "Profession",
+      "STUDY_LEVEL": "Niveau d'étude",
+      "OTHER_STUDY_LEVEL": "Autre niveau d'étude",
+      "SPOUSE_AGE": "Age conjoint(e)",
+      "SPOUSE_PROFESSION": "Profession du conjoint(e)",
+      "NATIONALITY": "Nationalité",
+      "EMPLOYER": "Employeur",
+      "PATIENT_CONTACT_AFFILIATION": "Contacts du patient/Filiation",
+      "PATIENT_DECLARED_CONTACT": "Le patient a déclaré un contact",
+      "CONTACT_TYPE": "Type de contact",
+      "ADDRESS": "Adresse",
+      "CARE": {
+        "TEXT": "Prise en charge",
+        "INSURER": "Assureur",
+        "VALIDITY_START_DATE": "Date de début de validité",
+        "VALIDITY_END_DATE": "Date de fin de validité",
+        "POLICY_NUMBER": "Numero d'assuré",
+        "CARD_NUMBER": "Numero de carte",
+        "CARE_PERCENTAGE": "Pourcentage prise en charge",
+        "LIMIT": "Plafond",
+        "HAS_CARE": "Le patient dispose d'une prise en charge ?",
+        "ADD": "Ajouter une prise en charge",
+        "EDIT": "Modifier une prise en charge",
+        "EDIT_A_CONTACT": "Modification d'un contact",
+        "VALIDITY": "Validité",
+        "GENERAL": "Général",
+        "SPECIFIC": "Cas spécifique de prise en charge",
+        "ADD_SPECIFIC": "Ajouter un cas spécifique de prise en charge",
+        "CARE_TYPE": "Type de prise en charge",
+        "CARE_TYPES": "Types de prise en charge",
+        "MED_ACT": "Acte médical",
+        "KEY_LETTER": "Lettre clé",
+        "SELECT_MED_ACT": "Sélectionnez un acte médical",
+        "SELECT_ROOM_CAT": "Sélectionnez une catégorie de chambre",
+        "SELECT_LETTER": "Sélectionnez une lettre de nomanclature"
+      }
+    },
+    "DETAILS": {
+      "DETAILS": "Détails patient",
+      "DETAILS_TEXT": "Détails du patient",
+      "ADMIN_DATA": {
+        "TEXT": "Données administratives",
+        "DLL_PATIENT_FILE": "Télécharger le dossier du patient",
+        "DLL_ANALYSIS_BARCODE": "Télécharger le code barre de l'analyse",
+        "PATIENT_ID": "Identité du patient",
+        "CONTACT_FILIATION": "Contacts/Filiation",
+        "ADD_CONTACT": "Ajouter un contact",
+        "ADDING_A_CONTACT": "Ajout d'un contact",
+        "EDIT_A_CONTACT": "Modification d'un contact",
+        "TYPE_OF_CONTACT": "Type de contact"
+      },
+      "MED_INTERROGATION": {
+        "TEXT": "Interrogation médicale",
+        "BLOOD_TYPE_LIFESTYLE": {
+          "TEXT": "Groupe sanguin & Habitudes de vie",
+          "BLOOD_TYPE": "Groupe sanguin",
+          "WEIGHT": "Poids",
+          "HEIGHT": "Taille",
+          "LIFESTYLE": "Mode de vie",
+          "SMOKER": "Fumeur",
+          "DO_SPORT": "Pratique du sport",
+          "PHYTOTHERAPY": "Phytothérapie",
+          "OTHER": "Autres informations"
+        },
+        "CURRENT_PATHOLOGIES": {
+          "TEXT": "Pathologies actuelles",
+          "MAIN_PATHOLOGIES": "Pathologies principales",
+          "ASS_PATHOLOGIES": "Pathologies associées",
+          "ATTACH_MAIN_PATH_TO_PATIENT": "Associer une pathologie principale au patient",
+          "ATTACH_ASS_PATH_TO_PATIENT": "Associer une pathologie associée au patient",
+          "SELECT_PATH": "Sélectionnez une pathologie",
+          "TYPE_NEW_PATH": "Entrez une nouvelle pathologie",
+          "PATHOLOGY": "Pathologie",
+          "ADD": "Ajouter une pathologie"
+        },
+        "HISTORY": {
+          "TEXT": "Antécédents",
+          "FAMILY_HISTORY": "Antécédents familiaux",
+          "MEDICAL_HISTORY": "Antécédents médicaux",
+          "GYNECOLOGICAL_OBSTETRICAL": "Gynécologiques et obstétricaux",
+          "SURGICAL": "Chirurgicaux",
+          "VARIOUS": "Divers"
+        },
+        "WORKING_CONDITIONS_HEALTHY_LIVING": {
+          "TEXT": "Conditions de travail & Hygiène de vie",
+          "WORKING_CONDITIONS": {
+            "TEXT": "Conditions de travail",
+            "PROFESSION_OR_FUNC": "Profession ou Fonction",
+            "DAILY_WORKING_HOURS": "Temps de travail journalier",
+            "WEEKLY_WORKING_HOURS": "Temps de travail hebdomadaire",
+            "PSYCH_PROFILE_IN_WORK": {
+              "TEXT": "Profil psychologique au travail",
+              "FULFILLMENT": "Epanouissement",
+              "MOTIVATION": "Motivation",
+              "BOREDOM": "Ennui",
+              "STRESS": "Stress",
+              "PHYSICAL_OVERLOAD": "Surcharge physique",
+              "EXHAUSTION": "Epuisement",
+              "MENTAL_OVERLOAD": "Surcharge mentale",
+              "HARASSMENT": "Harcèlement"
+            }
+          },
+          "HEALTHY_LIVING": {
+            "TEXT": "Hygiène de vie",
+            "PHYSICAL_ACTIVITY": "Activité physique",
+            "REGULAR_WALKING": "Marche régulière",
+            "SEDENTARINESS": "Sédentarité",
+            "SPORT": "Sport",
+            "TYPE_OF_SPORT": "Type de sport",
+            "FREQUENCY": "Périodicité",
+            "FOOD_INTAKE": "Alimentation",
+            "MEAL_TIMES": "Heures des repas",
+            "BREAKFAST": "Petit déjeûner",
+            "LUNCH": "Déjeûner",
+            "DINNER": "Dîner",
+            "NIBBLING": "Grignotage",
+            "FATTY_FOOD_INTAKE": "Consommation d'aliments gras",
+            "SELECT_FATTY_FOODS": "Sélectionnez des aliments gras",
+            "ADD_FATTY_FOOD": "Ajouter un nouvel aliment gras",
+            "SALT_INTAKE": "Consommation sel",
+            "DAILY_WATER_INTAKE": "Consommation eau par jour",
+            "STIMULANT_INTAKE": "Consommation excitants",
+            "SLEEP": "Sommeil",
+            "SLEEP_TIME": "Temps de sommeil"
+          },
+          "ALLERGIES": {
+            "TEXT": "Allergies",
+            "ALLERGY": "Allergie",
+            "DETECTION_DATE": "Date de détection",
+            "DETECTION_END_DATE": "Date de fin de détection",
+            "ATTACH_ALLERGY_TO_PATIENT": "Ajouter une allergie au patient",
+            "UPDATE_ALLERGY": "Modifier une allergie"
+          }
+        }
+      },
+      "DOCUMENT_HISTORY": {
+        "TEXT": "Historique documents",
+        "MEDICAL_DOCUMENTS": "Documents médicaux",
+        "FINANCIAL_DOCUMENTS": "Documents financiers",
+        "ADD_ONE_OR_MORE_FORMS": "Ajouter un ou plusieurs formulaires",
+        "ADD_DOCUMENT": "Ajouter un document",
+        "LIST": {
+          "DOCUMENT": "Document",
+          "ADDED_BY": "Ajouté par",
+          "ADDED_ON": "Ajouté le",
+          "SELECT_FORM_TYPE": "Sélectionnez un type de formulaire"
+        }
+      },
+      "MEDICAL_PASSPORT": {
+        "TEXT": "Passeport médical",
+        "CREATE_PASSPORT": "Créer le passeport"
+      },
+      "MEDICAL_FORM": {
+        "TEXT": "Fiche médicale"
+      },
+      "RESULTS": {
+        "TEXT": "Résultats"
+      },
+      "ANALYSIS_DOCS": {
+        "TEXT": "Documents analyse"
+      },
+      "APPTS": {
+        "TEXT": "Rendez-vous"
+      }
+    },
+    "READINSUREDCARD": {
+      "MENU_TEXT": "Identifier un assuré",
+      "TEXT": "Identification du patient",
+      "INFO_TEXT": "Identification d'un assuré",
+      "SEARCH_BY": "Rechercher par",
+      "SUBSCRIBER_NUMB": "N° d'adhérent",
+      "REGISTRATION_NUMB": "N° de matricule",
+      "INSURER": "Organisme de remboursement",
+      "REFERENCE": "Référence",
+      "QRCODE": "Code QR",
+      "INPUT": "Saisie"
+    },
+    "CATEGORY": {
+      "ADD": "Ajouter une categorie",
+      "CREATION": "Création de catégorie"
+    }
+  },
+      "MENUITEM": {
+    "MODULES": {
+      "TEXT": "Modules"
+    },
+    "MENU": {
+      "TEXT": "Menu"
+    },
+    "GENERIC": {
+      "NEW": "Nouveau"
+    },
+    "TABLES": {
+      "TEXT": "Tables",
+      "LIST": {
+        "BASIC": "Basic Tables",
+        "ADVANCED": "Advanced Table"
+      },
+      "LABELS": {
+        "SHOW": "Afficher",
+        "ENTRIES": "éléments",
+        "SHOWING": "Affichage de l'élément",
+        "TO": "à",
+        "OF": "sur",
+        "NODATA": "Aucune donnée à afficher.",
+        "SEARCH": "Rechercher",
+        "RESEARCH_TEXT": "Il est possible de rechercher par Référence, Sexe, Prénom, Nom, Date de naissance et Mobile"
+      }
+    }
+  },
+
+  "ENROLMENT":{
+    "TEXT": "Enrolement",
+    "ATTACHE_CARD": "Attacher une carte"
+  }
+    
+}

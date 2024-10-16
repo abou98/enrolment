@@ -1,0 +1,223 @@
+<div class="container-fluid">
+   <div class="row">
+    <div class="col-12">
+      <div class="page-title-box d-flex align-items-center justify-content-between">
+        <h4 class="mb-0">Enrôlement</h4>
+        <div class="page-title-right">
+          <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a routerLink="/">Accueil</a></li>
+            <li class="breadcrumb-item active">Enrôlement</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row px-3" *ngIf="showFromNumber || showOTPForm">
+    <div class="col-6 d-flex mx-auto">
+      <div class="card w-100">
+        <div class="card-body w-100">
+          <div class="row col-md-12 w-100">
+
+         
+              <form class="col-md-12 w-100" [formGroup]="form" *ngIf="showFromNumber">
+                    <div class="row col-12">
+                   
+                      <!-- </div>
+                        <div class="row col-12"> -->
+                 <div class="col-md-12 w-100 d-flex flex-column align-items-start" *ngIf="form.get('destinataryType').value == 'PATIENT'">
+                  <label for="patient">{{ 'GLOBAL.PATIENT' | translate}} <span
+                                    class="text-primary">*</span></label>
+                    <input class="form-control w-100" formControlName="patient" type="search" name="patient" id="patient"
+                    [ngClass]="{'is-invalid': submit && formControl.organismId.errors}"
+                        placeholder="Prénom, nom, téléphone" InputText (click)="handleClosed($event)"
+                        [matAutocomplete]="patient" style="outline: none;">
+                    <mat-autocomplete #patient="matAutocomplete" class="rounded mt-6">
+                        <mat-option *ngFor="let patient of patients" (click)="onSelectPatient2(patient)">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <span class="mr-2" style="font-size: 0.7rem;color:rgb(30 41 59);">{{
+                                    patient?.fullName
+                                    }}</span>
+                                <span *ngIf="patient?.mobileNumber" class="mr-2"
+                                    style="font-size: 0.7rem;color:rgb(30 41 59);">{{ patient?.mobileNumber
+                                    }}</span>
+                        
+                            </div>
+                        </mat-option>
+                        <hr class="m-0">
+                        <mat-option *ngIf="patients?.length === 0">
+                            <span style="font-size: 0.7rem;color:rgb(30 41 59);">0 resultat</span>
+                        </mat-option>
+                    </mat-autocomplete>
+                 </div>
+                </div>
+                     <div class="row col-12 w-100 d-flex justify-content-end">
+                    <button
+                        class="btn btn-primary text-white px-3 my-3 text-right"  (click)="sendOTP()">{{ 'GLOBAL.SEARCH' | translate }}</button>
+                   </div>
+                
+            </form>
+            
+          
+
+        
+            <form  [formGroup]="optForm" *ngIf="showOTPForm" class="w-100">
+              <div class="row col-12">
+                <div class="col-md-12 w-100">
+                  <div class="form-group w-100"> 
+                      <label for="content"> Entrer le OTP<span
+                                    class="text-primary">*</span></label>
+                            <input class="form-control" formControlName="otp" placeholder="Entrer le OTP"
+                            [ngClass]="{'is-invalid': submit && optFormControl.otp.errors}"
+                                name="" />
+                          </div>
+                </div>
+              </div>
+               <div class="row col-12 w-100 d-flex justify-content-end">
+                    <button
+                        class="btn btn-primary text-white px-3 my-3 text-right" (click)="valideOtp()">Valider le OTP</button>
+                   </div>
+            </form>
+            
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row px-3" *ngIf="showEnrolForm">
+  <div class="card w-100 p-2"> 
+  <div class="row col-12 w-100">
+                <form [formGroup]="enrolFrom" class="w-100">
+                  <div class="row col-12">
+                      <div class="col-md-6 w-100">
+                    <div class="form-group w-100"> 
+                        <label for="content"> Prénom<span
+                                      class="text-primary">*</span></label>
+                              <input class="form-control" formControlName="firstName" placeholder="Prénom"
+                              [ngClass]="{'is-invalid': submit && formControl.firstName.errors}"
+                                  name="" />
+                            </div>
+                </div>
+                 <div class="col-md-6 d-flex flex-column align-items-start">
+                                <label class="" for="">Nom<span
+                                        class="text-primary">*</span></label>
+                                <input type="text" class="form-control" formControlName="lastName" placeholder="Nom"
+                                    name="" [ngClass]="{ 'is-invalid': submitted && formEnrolControl?.lastName?.errors }">
+                                <div *ngIf="submitted && formEnrolControl?.lastName?.errors" class="invalid-feedback">
+                                    <div *ngIf="formEnrolControl?.lastName?.errors?.required">Vous devez entrer un nom.</div>
+                                </div>
+                  </div>
+                   </div>
+                   <div class="row col-12">
+                        <div class="col-md-6">
+                            <div class="form-group w-100">
+                                <label for="content">Date de naissance<span
+                                        class="text-primary">*</span></label>
+                                  <input class="form-control" formControlName="dateOfBirth" type="date" placeholder="Date de naissance"
+                                  [ngClass]="{'is-invalid': submit && formControl.dateOfBirth.errors}"
+                                      name="" />
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="" for="">Sexe<span
+                                    class="text-primary">*</span></label>
+                            <ng-select [items]="sexes" notFoundText="Aucun élement₁" 
+                            [ngClass]="{'is-invalid': submit && formControl.sexeId.errors}"
+                            formControlName="sexeId"
+                              placeholder="Veuillez sêlectionner" bindLabel="name" bindValue="identifier"></ng-select>
+                            <div *ngIf="submit && formControl.sexeId.errors" class="invalid-feedback">
+                                <div *ngIf="formControl.sexeId.errors?.required">Vous devez sêlectionner un genre.</div>  
+                            </div>
+                        </div>
+                   </div>
+
+                   <div class="row col-12">
+                    <div class="col-6">
+                      <div class="form-group w-100">
+                        <label for="sexe">Numéro d'identification national<span
+                                class="text-primary">*</span></label>
+                         <input class="form-control" type="text" formControlName="nin" placeholder="Numéro d'identification national"
+                                  [ngClass]="{'is-invalid': submit && formControl.nin.errors}"
+                                      name="" />
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group w-100">
+                        <label for="email">Email<span
+                                class="text-primary">*</span></label>
+                         <input class="form-control" type="email" formControlName="nin" placeholder="Email"
+                                  [ngClass]="{'is-invalid': submit && formControl.email.errors}"
+                                      name="" />
+                      </div>
+                    </div> 
+                   </div>  
+
+                   <div class="row col-12">
+                      <div class="col-6">
+                          <div class="form-group w-100">
+                            <label for="sexe">{{ 'NOTIFICATIONS.LIST.SELECT_ORG' | translate }} <span
+                                    class="text-primary">*</span></label>
+                            <ng-select [items]="organismes" notFoundText="Aucun élément trouvé" 
+                            [ngClass]="{'is-invalid': submit && formControl.organismId.errors}"
+                            formControlName="organismId"
+                              placeholder="Veuillez séléctionner" bindLabel="name" bindValue="identifier"></ng-select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="d-flex flex-column align-items-start">
+                                <label class="mb-1" for="">Sexe</label>
+                                <ng-select style="width: 100%;" [appendTo]="'body'" notFoundText="Aucun élement trouvé"
+                                    [items]="sexes" bindLabel="name" bindValue="identifier"
+                                    placeholder="Sélectionnez un élément" 
+                                    >
+                                </ng-select>
+                            </div>
+                      </div>
+                   </div>
+
+                   <div class="row col-12">
+                      <div class="col-6">
+                          <div class="form-group w-100">
+                            <label for="sexe">Région<span
+                                    class="text-primary">*</span></label>
+                            <ng-select [items]="regions" notFoundText="Aucun élement₁" 
+                            [ngClass]="{'is-invalid': submit && formControl.sexeId.errors}"
+                            formControlName="region"
+                              placeholder="Veuillez séléctionner" bindLabel="name" bindValue="identifier"></ng-select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                     
+                              <label class="" for="">Département</label>
+                              <ng-select [items]="regions" notFoundText="Aucun élement₁" 
+                            [ngClass]="{'is-invalid': submit && formControl.sexeId.errors}"
+                            formControlName="departement"
+                              placeholder="Veuillez séléctionner" bindLabel="name" bindValue="identifier"></ng-select>
+                        
+                    </div>
+                   </div>
+
+                   <div class="row col-12 w-100 d-flex justify-content-end">
+                    <button
+                        class="btn btn-primary text-white px-3 my-3 text-right mr-3" (click)="valideOtp()">Exporter la fiche enrolé</button>
+                    <button
+                        class="btn btn-success text-white px-3 my-3 text-right" (click)="valideOtp()">Enregistrer</button>
+                   </div>
+               
+                </form> 
+              
+              </div>
+             
+  </div>
+</div>
+
+</div>
+    
+
+
+       
+         
+
+
+

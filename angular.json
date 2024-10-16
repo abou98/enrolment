@@ -1,0 +1,778 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "nazox": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/nazox",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/assets/images/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "src/assets-msas/",
+                "output": "/assets/images/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/scss/bootstrap.scss",
+              "src/assets/scss/app.scss",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/ckeditor5-build-classic-plus/build/translations/fr.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "firebase/app",
+              "@firebase/app",
+              "@firebase/firestore",
+              "@firebase/component",
+              "@firebase/util",
+              "zrender",
+              "rxjs",
+              "echarts",
+              "chart.js",
+              "file-saver",
+              "core-js",
+              "apexcharts",
+              "canvg",
+              "ng-apexcharts",
+              "ngx-dropzone-wrapper",
+              "ngx-scrollbar-smooth-scroll",
+              "leaflet",
+              "dropzone",
+              "bezier-easing",
+              "pdfjs-dist",
+              "pdfjs-dist/web/pdf_viewer",
+              "sweetalert2",
+              "moment",
+              "ckeditor5-build-classic-plus"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/scss/themes/msas"]
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "7mb",
+                  "maximumError": "7mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "develop": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/develop",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "localsi": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hgu.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "devMsas": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.msas.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.msas.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/msas"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-msas/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/msas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "integMsas": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/integ/env.msas.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/integ/env.msas.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/msas"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-msas/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/msas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "preprodMsas": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/preprod/env.msas.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/preprod/env.msas.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/msas"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-msas/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/msas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "prodMsas": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/prod/env.msas.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/prod/env.msas.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/msas"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-msas/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/msas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "devDouanes": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.douanes.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.douanes.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/douanes"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-douanes/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/douanes",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "integDouanes": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/integ/env.douanes.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/integ/env.douanes.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/douanes"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-douanes/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/douanes",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "preprodDouanes": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/preprod/env.douanes.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/preprod/env.douanes.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/douanes"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-douanes/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/douanes",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "prodDouanes": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/prod/env.douanes.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/prod/env.douanes.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/douanes"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-douanes/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/douanes",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "devEyone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.eyone.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.eyone.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/eyone",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "integEyone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/integ/env.eyone.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/integ/env.eyone.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/eyone",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "preprodEyone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/preprod/env.eyone.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/preprod/env.eyone.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/eyone",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "prodEyone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/prod/env.eyone.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/prod/env.eyone.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "outputPath": "dist/eyone",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "douanes": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.douanes.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.douanes.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/douanes"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-douanes/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "msas": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.msas.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.msas.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/msas"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-msas/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "eyone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/dev/env.eyone.ts"
+                },
+                {
+                  "replace": "src/environments/environment.dev.ts",
+                  "with": "src/environments/dev/env.eyone.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/assets/scss/themes/eyone"]
+              },
+              "assets": [
+                "src/assets/images/favicon.ico",
+                {
+                  "glob": "**/*",
+                  "input": "src/assets-eyone/",
+                  "output": "/assets/images/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nazox:build:msas"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nazox:build:production"
+            },
+            "eyone": {
+              "browserTarget": "nazox:build:eyone"
+            },
+            "msas": {
+              "browserTarget": "nazox:build:msas"
+            },
+            "douanes": {
+              "browserTarget": "nazox:build:douanes"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nazox:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "nazox:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nazox:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "63173e4e-7a6e-4b26-9813-eb03aca3294a"
+  }
+}

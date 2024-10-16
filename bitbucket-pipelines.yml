@@ -1,0 +1,406 @@
+#  Template React Deploy
+
+#  This template allows you to deploy your React app to an AWS S3 bucket and invalidate the old AWS Cloudfront distribution.
+#  The workflow allows running tests, code linting and security scans on feature branches (as well as master).
+#  The react app will be validated, deployed to S3 and trigger an AWS Cloudfront distribution invalidation to refresh the CDN caches after the code is merged to master.
+
+# Prerequisites: $AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY setup in the Deployment variables.
+# For advanced cases, please, follow examples from the pipe's:
+# README https://bitbucket.org/atlassian/aws-s3-deploy/src/master/README.md
+# README https://bitbucket.org/atlassian/aws-cloudfront-invalidate/src/master/README.md
+
+image: node:14
+
+# Workflow Configuration
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Build and Test
+          caches:
+            - node
+          script:
+            - npm install  --legacy-peer-deps
+            # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+            - npm test
+      - step:
+          name: Lint the node package
+          script:
+            # Run your linter of choice here
+            - npm install eslint
+            #- npx eslint src
+          caches:
+            - node
+  branches: 
+    develop:
+          #build simultane des trois environnement
+          - parallel:
+            - step:
+                name: Build and Test DOUANES
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build-dev-douanes
+                  - mkdir -p douanes 
+                  - mv dist/* douanes/
+                  - ls douanes
+                artifacts:
+                  - douanes/**          
+            - step:
+                name: Build and Test MSAS
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build-dev-msas
+                  - mkdir -p msas
+                  - mv dist/* msas/
+                  - ls msas
+                artifacts:
+                  - msas/**
+            - step:
+                name: Build and Test EYONE
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build-dev-eyone
+                  - mkdir -p eyone
+                  - mv dist/* eyone/
+                  - ls eyone
+                artifacts:
+                  - eyone/**
+          - parallel:
+            - step:
+                name: Deploy to DEV DOUANES
+                deployment: DEV DOUANE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      S3_BUCKET: $AWS_BUCKET_NAME_DOUANES_DEV_NV
+                      LOCAL_PATH: 'douanes/nazox'
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_DOUANES_DEV_NV
+            
+            - step:
+                name: Deploy to DEV MSAS
+                deployment: DEV MSAS 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      S3_BUCKET: $AWS_BUCKET_NAME_MSAS_DEV_NV
+                      LOCAL_PATH: 'msas/nazox'
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_MSAS_DEV_NV
+            - step:
+                name: Deploy to DEV EYONE
+                deployment: DEV EYONE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                # sync your files to S3
+                - pipe: atlassian/aws-s3-deploy:1.1.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    S3_BUCKET: $AWS_BUCKET_NAME_EYONE_DEV_NV
+                    LOCAL_PATH: 'eyone/nazox'
+                - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_EYONE_DEV_NV
+    preprod:
+          #build simultane des trois environnement
+          - parallel:
+            - step: #douanes
+                name: Build and Test DOUANES
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:preprod:douanes
+                  - mkdir -p douanes 
+                  - mv dist/* douanes/
+                  - ls douanes
+                artifacts:
+                  - douanes/**          
+            - step: #msas
+                name: Build and Test MSAS
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:preprod:msas
+                  - mkdir -p msas
+                  - mv dist/* msas/
+                  - ls msas
+                artifacts:
+                  - msas/**
+            - step: # eyone
+                name: Build and Test EYONE
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:preprod:eyone
+                  - mkdir -p eyone
+                  - mv dist/* eyone/
+                  - ls eyone
+                artifacts:
+                  - eyone/**
+          - parallel:
+            - step: #douanes
+                name: Deploy to PREPROD DOUANES
+                deployment: PREPROD DOUANE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      S3_BUCKET: $AWS_BUCKET_NAME_DOUANES_DEV_NV
+                      LOCAL_PATH: 'douanes/nazox'
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_DOUANES_DEV
+            - step: #msas 
+                name: Deploy to PREPROD MSAS
+                deployment: PREPROD MSAS 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                  # backup old version and clear S3  js fieds
+                  - apt-get update && apt-get install -y zip awscli
+                  - mkdir -p backup 
+                  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+                  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                  - aws configure set default.region $AWS_DEFAULT_REGION_PREPROD
+                  - aws s3 sync s3://$AWS_BUCKET_NAME_PREPROD ./backup
+                  - timestamp=$(date +%Y%m%d%H%M%S)
+                  - zip -r backup-$timestamp.zip ./backup 
+                  - for key in $(aws s3api list-objects --bucket $AWS_BUCKET_NAME_PREPROD --query "Contents[?ends_with(Key, '.js')].Key" --output text); do aws s3 rm s3://$AWS_BUCKET_NAME_PREPROD/$key; done
+                  - aws s3 cp backup-$timestamp.zip s3://$AWS_BUCKET_NAME_PREPROD/backup-$(date +%Y%m%d%H%M%S).zip
+                  - ls  backup-$timestamp.zip
+                  - ls 
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_PREPROD
+                      S3_BUCKET: $AWS_BUCKET_NAME_PREPROD
+                      LOCAL_PATH: 'msas/msas'
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_PREPROD
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_PREPROD
+            - step: #eyone 
+                name: Deploy to PREPROD EYONE
+                deployment: PREPROD EYONE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                # sync your files to S3
+                - pipe: atlassian/aws-s3-deploy:1.1.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    S3_BUCKET: $AWS_BUCKET_NAME_EYONE_DEV_NV
+                    LOCAL_PATH: 'eyone/eyone'
+                - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_EYONE_DEV_NV      
+    prod:
+          #build simultane des trois environnement
+          - parallel:
+            - step: #douanes
+                name: Build and Test DOUANES
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:prod:douanes
+                  - mkdir -p douanes 
+                  - mv dist/* douanes/
+                  - ls douanes
+                artifacts:
+                  - douanes/**          
+            - step: #msas
+                name: Build and Test MSAS
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:prod:msas
+                  - mkdir -p msas
+                  - mv dist/* msas/
+                  - ls msas
+                artifacts:
+                  - msas/**
+            - step: # eyone
+                name: Build and Test EYONE
+                caches:
+                  - node
+                size: 2x # Double resources available for this step.
+                script:
+                  - npm install  --legacy-peer-deps
+                  # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
+                  #- npm test
+                  - NODE_OPTIONS=--max-old-space-size=8192  npm run build:prod:eyone
+                  - mkdir -p eyone
+                  - mv dist/* eyone/
+                  - ls eyone
+                artifacts:
+                  - eyone/**
+          - parallel:
+            - step: #douanes
+                name: Deploy to PROD DOUANES
+                deployment: PROD DOUANE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      S3_BUCKET: $AWS_BUCKET_NAME_DOUANES_DEV_NV
+                      LOCAL_PATH: 'douanes/nazox'
+                  # triggering a distribution invalidation to refresh the CDN caches
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_DOUANES_DEV
+            - step: #msas 
+                name: Deploy to PROD MSAS
+                deployment: PROD MSAS 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                # backup old version and clear S3  js fieds 
+                  - apt-get update && apt-get install -y zip awscli
+                  - mkdir -p backup 
+                  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+                  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                  - aws configure set default.region $AWS_DEFAULT_REGION_PROD
+                  - aws s3 sync s3://$AWS_BUCKET_NAME_PREPROD ./backup
+                  - timestamp=$(date +%Y%m%d%H%M%S)
+                  - zip -r backup-$timestamp.zip ./backup 
+                  - for key in $(aws s3api list-objects --bucket $AWS_BUCKET_NAME_PROD --query "Contents[?ends_with(Key, '.js')].Key" --output text); do aws s3 rm s3://$AWS_BUCKET_NAME_PROD/$key; done
+                  - aws s3 cp backup-$timestamp.zip s3://$AWS_BUCKET_NAME_PROD/backup-$(date +%Y%m%d%H%M%S).zip
+                  - ls  backup-$timestamp.zip
+                  
+                  # sync your files to S3
+                  - pipe: atlassian/aws-s3-deploy:1.1.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_PROD
+                      S3_BUCKET: $AWS_BUCKET_NAME_PROD
+                      LOCAL_PATH: 'msas/msas'
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_PROD
+                      DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_PROD
+                  
+                  
+            - step: #eyone 
+                name: Deploy to PROD EYONE
+                deployment: PROD EYONE 
+                trigger: manual
+                clone:
+                  enabled: false
+                script:
+                # sync your files to S3
+                - pipe: atlassian/aws-s3-deploy:1.1.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    S3_BUCKET: $AWS_BUCKET_NAME_EYONE_DEV_NV
+                    LOCAL_PATH: 'eyone/eyone'
+                - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                  variables:
+                    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION_DEV_NV
+                    DISTRIBUTION_ID: $AWS_DISTRIBUTION_ID_DEV_NV
+              
+          

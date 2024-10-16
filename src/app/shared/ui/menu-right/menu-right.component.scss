@@ -1,0 +1,31 @@
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "../../../../assets/scss/variables";
+
+.container_menu_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  height: 100vh;
+}
+
+.menu_right_link {
+  align-self: center;
+  margin: 2px 0px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+  padding: 0.3rem;
+}
+
+.container_menu_right_wrapper {
+  // background-color: rgba($primary, 0.3);
+  background-color: white;
+  padding: 3px 6px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+}

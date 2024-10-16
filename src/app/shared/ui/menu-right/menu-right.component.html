@@ -1,0 +1,10 @@
+<div class="container_menu_right">
+    <div (mouseenter)="onShowTitle()" (mouseleave)="onHideTitle()" class="container_menu_right_wrapper border shadow">
+        <a *ngFor="let menu of menus" (click)="openModal(menu)"
+            class="nav-link dropdown-toggle arrow-none default menu_right_link bg-primary" href="javascript: void(0);"
+            id="topnav-components" role="button">
+            <i class="{{ menu?.icone}}" [ngClass]="{'mr-2': showTitle}"></i>
+            <span *ngIf="showTitle" class="text-white">{{ menu?.title }}</span>
+        </a>
+    </div>
+</div>

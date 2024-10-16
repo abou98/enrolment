@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "assets/scss/variables";
+@import "assets/angular-calendar.css";
+// @import "./node_modules/angular-calendar/css/angular-calendar.css";
+
+.fc-time-grid .fc-slats td {
+  height: 4.4em !important;
+  border-bottom: 0;
+  font-size: 10px;
+}
+.fc-bootstrap a.fc-event:not([href]):not([tabindex]) {
+  color: #fff;
+  font-size: 10px;
+  height: 35px !important;
+}
+.cal-week-view .cal-time-events .cal-event {
+  line-height: normal !important;
+  font-size: 10px;
+}
+
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+.cdk-overlay-container,
+.cdk-overlay-pane {
+  z-index: 9999 !important;
+  .mat-autocomplete-panel:not([class*="mat-elevation-z"]) {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+  .mat-autocomplete-panel {
+    background: #fff;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+.modal-backdrop {
+  z-index: 1050 !important;
+}
+.np {
+  background-color: rgb(254 202 202);
+}
+.p {
+  background-color: rgb(187 247 208);
+}
+.rej {
+  background-color: rgb(254 249 195);
+}
+.ret {
+  background-color: rgb(219 234 254);
+}
+// Calendar icon
+button.calendar,
+button.calendar:active {
+  width: 2.75rem;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=") !important;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: center;
+}
+.input-group-override {
+  display: flex;
+  align-items: center;
+  padding: 0.47rem 0.75rem;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #505d69;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #eff2f7;
+  border: 1px solid #ced4da;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+.loader {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-bottom;
+  border: 0.15em solid currentColor;
+  display: inline-block;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-border 0.75s linear infinite;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+.accent {
+  color: $primary;
+}
+.pmaccent {
+  color: #1cbb8c;
+}
+.inactive {
+  color: $inactive-color;
+}
+
+// Custom inputs
+.dashed-bottom {
+  font-size: 1rem;
+  color: $primary;
+  border-top: none;
+  border-left: none;
+  border-bottom: 1px dashed black;
+  border-right: none;
+  border-radius: 0;
+}
+.no-border {
+  border: none;
+  color: $primary;
+}
+th[sortable] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.border-right-light {
+  border-right: 1px solid #eff2f7;
+}
+.border-right-dark {
+  border-right: 1px solid #383c40;
+}
+
+.custom-backdrop {
+  opacity: 0.9 !important;
+  background-color: #000;
+}
+
+input[type="checkbox"] {
+  accent-color: $primary;
+}
+
+input[type="radio"] {
+  accent-color: $primary;
+}
+.ck-editor__editable {
+  p {
+    font-size: 16px;
+    font-weight: 300;
+
+    strong {
+      font-weight: 900;
+    }
+  }
+}

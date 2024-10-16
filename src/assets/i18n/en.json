@@ -1,0 +1,121 @@
+{
+  "SHARED": {
+    "HOME": "Home",
+    "NOTIFICATIONS": "Notifications",
+    "REMINDERS": "Reminders"
+  },
+  "AUTH": {
+    "TEXT": {},
+    "BUTTONS": {
+      "LOGIN": "Log In"
+    }
+  },
+  "HEADER": {
+    "NOTIFICATIONS": {
+      "SUPPORT": "Support",
+      "SLOGAN": "Your activities by your side.",
+      "COPY_WRITE": "© 2022 EYONE.",
+      "NOTIFICATION": "Notifications"
+    },
+    "LOGIN": {
+      "ACCOUNT": "My account",
+      "ORGANIZATION": "My organization",
+      "INTERNAL_PHONE_BOOK": "In-house directory",
+      "ORGANIZATION_CHART": "Organization chart",
+      "PHONE_BOOK": "Contact directory",
+      "LOGOUT": "Lot Out",
+      "LOGIN": "Log In",
+      "REQUIRED_ID": "Username required",
+      "REQUIRED": "This field is required",
+      "ID": "Username",
+      "VALIDE_EMAIL": "Please enter a valid e-mail address",
+      "PASSWORD": "Password",
+      "PASSWORD_CONFIRM": "Password confirmation",
+      "PASSWORD_CHARACTERS": "Password must be at least 6 characters",
+      "PASSWORD_CONFIRM_VALUES": "Passwords must be identical",
+      "REQUIRED_PASSWORD": "Password required",
+      "BTN_LOGIN": "Log In",
+      "PASSWORD_FORGOTEN": "Forgot password ? Reset"
+    }
+  },
+  "MENU": {
+    "TITLE": "Passport Médical",
+    "SUB_MENU": {
+      "ELEMENT_1": "Enrolment",
+      "ELEMENT_2": "Search"
+     
+    }
+  },
+   
+  "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "LIST": {
+      "TITLE": "Notification List",
+      "SEARCH_TITLE": "Filter by organization",
+      "SELECT_ORG": "Select an organization",
+       "PUSH_TITLE": "Push Notification",
+       "BY_FORM": "By Form",
+       "BY_FILE": "By File",
+       "SELECT_CIBLE":"Select Target",
+       "SELECT_CHANNEL":"Select Channel",
+       "SELECT_TYPE":"Select Type de destinatary",
+       "ENTER_NUMBERS":"Enter Numbers Separated by Commas",
+       "REASON":"Reason",
+       "MESSAGE":"Message"
+    }
+  },
+  "RAPPELLS": {
+    "TITLE": "Reminders",
+    "PENDING_REMINDER": {
+      "TITLE": "List of pending reminders"
+    },
+    "TREATED_REMINDER": {
+    "TITLE": "List of treated reminders"
+  }
+  },
+   "PARAMETRAGE": {
+    "TITLE": "Reminders settings",
+    "CREATE": "Create",
+    "EVENEMENT": "Event",
+    "TYPE_DESTINATAIRE": "Type of recipient",
+    "TYPE_RAPPEL": "Type of reminder",
+    "VALEUR": "Value"
+  },
+  "GLOBAL": {
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL": "Email",
+    "TELEPHONE": "Phone",
+    "ADDRESS": "Address",
+    "STATUT": "Status",
+    "SUPPORT": "Support",
+    "PATIENT": "Patient",
+    "DATE": "Date",
+    "SEND": "Send",
+    "SEND_ALL": "Send to All",
+    "SEND_ALL_TEXT": "Send to all users",
+    "MESSAGE": "Message",
+    "MOTIF": "Reason",
+    "MOTIF_MESSAGE": "Reason for the message",
+    "SEARCH": "Search",
+    "ENVOYER": "Send",
+    "CREATE": "Create",
+    "AFFICHER": "Display",
+    "ANULLER": "Cancel",
+    "SUPPRIMER": "Delete",
+    "MODIFIER": "Edit",
+    "VALIDER": "Validate",
+    "ACTION": "Action",
+    "A": "to",
+    "SUR": "on",
+    "TOUT": "All",
+    "ELEMENTS": "items",
+    "ACCUEIL": "Home",
+    "VISUALISER": "Display",
+    "LOADING_MESSAGE": "Please wait, it will take a few moments 😊 ..."
+  },
+   "ENROLMENT":{
+    "TEXT": "Enrolment",
+    "ATTACHE_CARD": "Attach a card"
+  }
+}

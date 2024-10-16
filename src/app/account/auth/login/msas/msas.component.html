@@ -1,0 +1,71 @@
+<div class="home-btn d-none d-sm-block">
+  <a routerLink=""><i class="mdi mdi-home-variant h2 text-white"></i></a>
+</div>
+<div>
+  <div class="container-fluid p-0">
+    <div class="row no-gutters">
+      <div class="col-12">
+        <div class="authentication-bg">
+          <div class="h-100 d-flex flex-column justify-content-center">
+            <div class="row mx-5 align-items-center">
+              <div class="col-md-5 d-flex flex-column align-items-center px-4">
+                <div>
+                  <a routerLink="" class="logo"><img src="assets/images/logo_no_bg.svg" height="120" alt="logo"></a>
+                </div>
+
+                <h5 class="text-white mt-4 mb-0">Application d'enrôlement</h5>
+
+                <div class="mt-4 w-100 bg-light d-flex flex-column align-items-center p-4">
+                  <h4 class="text-primary mb-0">{{ 'HEADER.LOGIN.LOGIN' | translate}}</h4>
+                  <p class="text-dark mb-0">{{ 'HEADER.NOTIFICATIONS.SLOGAN' | translate}}</p>
+
+                  <div class="mt-3 w-100">
+                    <form class="form-horizontal" [formGroup]="loginForm">
+                      <div class="auth-form-group-custom mb-3">
+                        <i class="ri-user-2-line auti-custom-input-icon text-dark"></i>
+                        <label for="emailMsas">{{ 'HEADER.LOGIN.ID' | translate}}</label>
+                        <input type="email" formControlName="email" class="form-control" id="emailMsas"
+                          placeholder="Identifiant" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                          <span *ngIf="f.email.errors.required">{{ 'HEADER.LOGIN.REQUIRED' | translate
+                            }}</span>
+                          <span *ngIf="f.email.errors.pattern">{{ 'HEADER.LOGIN.VALIDE_EMAIL' |
+                            translate
+                            }}</span>
+                        </div>
+                      </div>
+
+                      <div class="auth-form-group-custom">
+                        <i class="ri-lock-2-line auti-custom-input-icon text-dark"></i>
+                        <label for="passwordMsas">{{ 'HEADER.LOGIN.PASSWORD' | translate}}</label>
+                        <input type="password" formControlName="password" class="form-control" id="passwordMsas"
+                          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Mot de passe" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <span *ngIf="f.email.errors.required">{{ 'HEADER.LOGIN.REQUIRED' | translate
+                            }}</span>
+                        </div>
+                      </div>
+
+                      <div class="mt-4 text-center">
+                        <a routerLink="/account/reset-password" class="text-muted"><i class="mdi mdi-lock mr-1"></i>
+                          {{ 'HEADER.LOGIN.PASSWORD_FORGOTEN' | translate}} <i class="ri-refresh-fill"></i></a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <button (click)="onSubmit()" class="w-50 btn btn-primary btn-rounded py-2 mt-4">
+                  Connexion
+                </button>
+
+                <div class="mt-4 text-white text-center">
+                  © {{ year }} EYONE.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

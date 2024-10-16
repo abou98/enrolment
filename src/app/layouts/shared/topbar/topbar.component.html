@@ -1,0 +1,83 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a routerLink="/" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="assets/images/logo_sm.svg" alt="" height="38" *ngIf="projectName !== 'eyone'">
+            <img src="assets/images/simedical_logo.png" alt="" height="38" *ngIf="projectName === 'eyone'">
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/logo_sm.svg" alt="" height="38" *ngIf="projectName !== 'eyone'">
+            <img src="assets/images/simedical_logo.png" alt="" height="38" *ngIf="projectName === 'eyone'">
+            <span class="ml-2" style="letter-spacing: .04rem; font-size: 1.2rem; color: #a4a4a4;">Accueil</span>
+          </span>
+        </a>
+
+        <a routerLink="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="assets/images/logo_sm.svg" alt="" height="38" *ngIf="projectName !== 'eyone'">
+            <img src="assets/images/simedical_logo.png" alt="" height="38" *ngIf="projectName === 'eyone'">
+          </span>
+          <span class="logo-lg">
+            <img class="ml-3" src="assets/images/logo_sm.svg" alt="" height="38" *ngIf="projectName !== 'eyone'">
+            <img class="ml-3" src="assets/images/simedical_logo.png" alt="" height="38" *ngIf="projectName === 'eyone'">
+            <span class="text-white ml-2" style="font-size: 1.3rem;">{{ projectDesc }}</span>
+          </span>
+        </a>
+      </div>
+
+      <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn"
+        (click)="toggleMobileMenu($event)">
+        <i class="ri-menu-2-line align-middle"></i>
+      </button>
+
+      <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect text-dark">
+        <span>{{currentUser?.currentOrganismName}}</span>
+      </button>
+
+    </div>
+
+    <div class="d-flex">
+
+      <div class="dropdown d-inline-block" ngbDropdown>
+        <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
+          <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"> <span
+            class="ml-1">{{countryName}}</span>
+          <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="16">
+          <span *ngIf="flagvalue === undefined" class="ml-1">Français</span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+          <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
+            (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{'active': cookieValue === item.lang}">
+            <img src="{{item.flag}}" alt="user-image" class="mr-1" height="12"> <span
+              class="align-middle">{{item.text}}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block user-dropdown" ngbDropdown>
+        <button type="button" ngbDropdownToggle class="btn header-item waves-effect" id="page-header-user-dropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-9.jpeg" alt="Header Avatar">
+          <span class="d-none d-xl-inline-block ml-1">{{currentUser.fullName}}</span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+
+          <a class="dropdown-item" [routerLink]="['/theorganization/myaccount']">
+            <i class="ri-settings-5-line align-middle mr-1"></i>
+            {{ 'HEADER.LOGIN.ACCOUNT' | translate}}
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="javascript: void(0);" (click)="logout()"><i
+              class="ri-shut-down-line align-bottom mr-1 text-primary"></i>
+            {{ 'HEADER.LOGIN.LOGOUT' | translate}}</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>

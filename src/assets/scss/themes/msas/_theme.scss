@@ -1,0 +1,12 @@
+@import "../project-theme";
+
+$project-theme: project-theme(
+  #d00000,
+  #1c2120,
+  #8590a5,
+  #8590a5,
+  #8590a5,
+  #ffffff,
+  rgba(0, 0, 0, 0),
+  #fcb92c
+) !default;
